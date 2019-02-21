@@ -1,0 +1,22 @@
+haproxy_cfg_dest: /etc/haproxy/haproxy.cfg
+
+haproxy_frontend_name: 'hafrontend'
+haproxy_frontend_bind_address: '*'
+haproxy_frontend_port: 80
+haproxy_frontend_mode: 'http'
+haproxy_backend_name: 'habackend'
+
+haproxy_backend_mode: 'http'
+haproxy_backend_balance_method: 'roundrobin'
+
+backend_name_1: 'ubuntu-server01'
+backend_address_1: '192.168.1.27'
+backend_port_1: 80
+
+backend_name_2: 'ubuntu-server02'
+backend_address_2: '192.168.1.28'
+backend_port_2: 80
+
+rule: "allow"
+proto: "any"
+delete: "yes"

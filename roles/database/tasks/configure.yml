@@ -1,0 +1,11 @@
+- name: Get MySQL version
+  command: 'mysql --version'
+  register: mysql_cli_version
+  changed_when: false
+  check_mode: false
+
+- name:  Copy mysqld.cnf global MySQL configuration
+  template:
+    src: mysqld.cnf.j2
+    dest: "{{ mysql_config_file }}"
+  notify: restart mysql

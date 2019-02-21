@@ -1,0 +1,41 @@
+- name: Install ufw
+  become: yes
+  apt:
+    name: ufw
+    state: installed
+
+- name: Allow SSH access to logserver
+  ufw:
+    rule: allow
+    proto: tcp
+    from_ip: any
+    port: 22
+  notify: restart ufw
+
+- name: Allow or Deny access
+  ufw:
+    rule: allow
+    delete: no
+    proto: any
+    port: "{{ item }}"
+  notify: restart ufw
+  with_items:
+    - 80
+    - 443
+
+- name: Deny access
+  ufw:
+    rule: deny
+    delete: no
+    proto: any
+  notify: restart ufw
+
+- name: Start ufw service
+  service:
+    name: ufw
+    state: restarted
+    enabled: yes
+
+- name: Enable ufw functionality
+  ufw:
+    state: enabled

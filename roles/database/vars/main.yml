@@ -1,0 +1,20 @@
+db_user_name: sofian 
+db_user_pass: satel2018*
+db_user_host: localhost
+db_name: satel
+
+mysql_port: 3306
+mysql_bind_address: 192.168.1.22
+mysql_datadir: /var/lib/mysql
+mysql_config_file: /etc/mysql/mysql.conf.d/mysqld.cnf
+mysql_socket: /var/run/mysqld/mysqld.sock
+mysql_pid_file: /var/run/mysqld/mysqld.pid
+mysql_tmp: /tmp
+mysql_basedir: /usr
+
+mysql_log_error: /var/log/mysql/error.log
+
+rule: "allow"
+proto: "any"
+delete: "yes"
+

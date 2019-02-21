@@ -1,0 +1,4 @@
+- include: install.yml
+- include: configure.yml
+- include: creation.yml
+- include: firewall.yml

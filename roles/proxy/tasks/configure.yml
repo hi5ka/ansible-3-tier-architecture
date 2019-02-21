@@ -1,0 +1,3 @@
+- name: Deploy Haproxy config
+  template: src=haproxy.cfg.j2 dest={{ haproxy_cfg_dest }}
+  notify: restart haproxy

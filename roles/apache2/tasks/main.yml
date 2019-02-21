@@ -1,0 +1,35 @@
+   - include: firewall.yml
+   - include: modsecurity.yml
+
+   - name: Installation et configuration Apache Web Server
+     apt: name=apache2 update_cache=yes state=latest
+
+   - name: installtion tools mysql
+     apt: name=mysql-client update_cache=yes state=latest
+
+   - name: Activation mod_rewrite
+     apache2_module: name=rewrite state=present
+     notify:
+      - restart apache2
+
+   - name: Création dossier dépendant du domaine dans test
+     file:
+       path: /var/www/test/{{ domain }}
+       state: directory
+       owner: www-data
+       group: www-data
+       mode: 0775
+       recurse: yes
+
+   - name: Copie des fichiers dans /var/www/test/{{ domain }}
+     copy: src=/etc/ansible/roles/apache2/files/index2.html dest=/var/www/test/{{ domain }}/index2.html
+ 
+   - name: Configuration Virtual Host
+     template: src=templates/{{ domain }}.conf.j2 dest=/etc/apache2/sites-available/{{ domain }}.conf
+   
+   - name: a2ensite
+     command: a2ensite {{ domain }}
+     args:
+       creates: /etc/apache2/sites-enabled/{{ domain }}.conf
+     notify:
+      - restart apache2

@@ -1,0 +1,7 @@
+- name: Install Haproxy
+  apt: name=haproxy update_cache=yes state=present
+
+- name: Enable Haproxy
+  service: 
+    name: haproxy
+    enabled: yes 

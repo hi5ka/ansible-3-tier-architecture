@@ -1,0 +1,17 @@
+- name: Install the Apache mod_security2 module
+  apt:
+    name: libapache2-mod-security2
+    update_cache: yes
+    state: latest
+
+- name: Enable mod_security2
+  apache2_module:
+    name: security2
+    state: present
+  notify:
+   - restart apache2
+
+- lineinfile:
+    path: /etc/modsecurity/modsecurity.conf
+    regexp: '^SecRuleEngine DetectionOnly'
+    line: 'SecRuleEngine On'
