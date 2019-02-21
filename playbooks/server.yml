@@ -1,0 +1,11 @@
+- name: Installation de serveurs
+  hosts: linux
+  become: yes
+  tasks:
+   - name: Installation des dépendances
+     apt: name={{ item }} update_cache=yes state=latest
+     with_items:
+      - vim
+      - htop
+      - git
+      - bind9

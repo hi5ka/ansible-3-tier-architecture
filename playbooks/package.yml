@@ -1,0 +1,7 @@
+- name: Installer des packets
+  hosts: linux
+  become: yes
+  tasks:
+    - name: Packets
+      action: >
+        {{ ansible_pkg_mgr }} name=gcalctool state=present update_cache=yes

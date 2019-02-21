@@ -1,0 +1,9 @@
+- name: Création d'un utilisateur
+  hosts: proxy
+  vars:
+    user: jean
+  become: yes
+  tasks:
+   - name: Nouveau utilisateur
+     when: user is defined
+     user: name={{ user }} comment="Mon nouvel utilisateur" shell=/usr/bin/bash
